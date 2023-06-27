@@ -3,10 +3,8 @@ name: Go Lint & Test
 
 # This workflow gets triggered upon a push event on any branch
 on:
-  [push]:
-    branches:
-      - '**'
-      - '!main'
+  push:
+    branches: [ main ]
 
 # Jobs are the tasks that this workflow will run
 jobs:
