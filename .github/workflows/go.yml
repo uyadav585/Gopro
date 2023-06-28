@@ -45,6 +45,9 @@ jobs:
     # Checks out your repository under $GITHUB_WORKSPACE 
     - name: Checkout code
       uses: actions/checkout@v3
+    # build
+    - name: Build
+      run: go build -v ./...
     # Runs the tests and next deploy
     - name: Test
       run: go test -v ./...
