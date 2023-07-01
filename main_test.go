@@ -33,3 +33,4 @@ func TestHelloHandler(t *testing.T) {
 		t.Errorf("Expected response body to contain substring '%s', but it did not", expectedSubstring)
 	}
 }
+
