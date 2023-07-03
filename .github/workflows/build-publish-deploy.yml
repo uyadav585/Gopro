@@ -3,7 +3,8 @@ name: Build, Publish and Deploy
 
 # This workflow gets triggered upon a pull request is closed (merged) event
 on:
-  push:
+  pull_request:
+    types: [closed]
     branches: [main]
 
 # Jobs are the tasks that this workflow will run
@@ -28,42 +29,4 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           tags: "latest,${{ github.sha }}"
 
-  # Deploy job, updates Elastic Beanstalk environment
-  deploy:
-    name: Deploy to Elastic Beanstalk
-    needs: build-and-publish
-    runs-on: ubuntu-latest
-    steps:
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS__ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_ACCESS_KEY }}
-          aws-region: "us-east-1"
-
-      - name: Update Elastic Beanstalk environment
-        run: |
-          aws elasticbeanstalk update-environment \
-            --environment-name Demo-env \
-            --version-label "1"
-
-  # Smoke Test job, checks if the application is running
-  smoke-test:
-    name: Smoke Test
-    needs: deploy
-    runs-on: ubuntu-latest
-    steps:
-      - name: Wait for environment to start
-        run: sleep 120  # Adjust the duration based on the startup time of your Elastic Beanstalk environment
-
-      - name: Run smoke test
-        env:
-          AWS_APP_URL: ${{ secrets.AWS_APP_URL }}
-        run: |
-          sleep 60  # Wait for the application to start
-          status_code=$(curl --silent --output /dev/null --write-out "%{http_code}" $AWS_APP_URL)
-          if [ $status_code -ne 200 ]; then
-            echo "Smoke test failed with HTTP status code $status_code"
-            exit 1
-          fi
-
+        
