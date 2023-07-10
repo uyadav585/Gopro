@@ -30,7 +30,7 @@ jobs:
           tags: "latest,${{ github.sha }}"
 
         
-  # Deploy job, updates Elastic Beanstalk environment
+  # Deploy job, updates Elastic Beanstalk environment and test
   deploy:
     name: Deploy to Elastic Beanstalk
     needs: build-and-publish
