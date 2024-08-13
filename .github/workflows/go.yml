@@ -1,7 +1,7 @@
 # Name of this workflow
 name: Go Lint & Test
 
-# This workflow gets triggered upon a push event on any branch
+# This workflow gets triggered upon a push event on any branch later it will be changed
 on:
   push:
     branches: [ main ]
