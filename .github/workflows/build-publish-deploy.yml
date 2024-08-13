@@ -4,10 +4,10 @@ name: Build, Publish and Deploy
 # This workflow gets triggered upon a pull request is closed (merged) event let see
 on:
   pull_request:
-    types: [closed]
+    types: [opened]
     branches: [main]
 
-# Jobs are the tasks that this workflow will run
+# Job s are the tasks that this workflow will run
 jobs:
   # Build and Publish job, builds the Docker image and pushes it to DockerHub
   build-and-publish:
