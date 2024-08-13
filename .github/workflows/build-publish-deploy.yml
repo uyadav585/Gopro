@@ -5,7 +5,7 @@ name: Build, Publish and Deploy
 on:
   pull_request:
     types: [closed]
-    branches: [main]
+    branches: [uyadav585-patch-4]
 
 # Jobs are the tasks that this workflow will run
 jobs:
