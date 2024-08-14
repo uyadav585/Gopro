@@ -4,7 +4,7 @@ on:
     branches:
       - main
 
-# Job s are the tasks that this workflow will run
+# Job s are the tasks that this workflow will run lets see
 jobs:
   # Build and Publish job, builds the Docker image and pushes it to DockerHub
   build-and-publish:
