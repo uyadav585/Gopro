@@ -15,7 +15,7 @@ jobs:
       # Checks out your repository under $GITHUB_WORKSPACE
       - uses: actions/checkout@v3
       # Builds the Docker image
-      - name: Build the Docker image
+      - name: Build the Docker image an test
         run: docker build . --file Dockerfile --tag uyadav585/ci-cd:${{ github.sha }}
       # Publishes the Docker image to DockerHub
       - name: Publish to Registry
