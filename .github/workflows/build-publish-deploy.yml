@@ -3,3 +3,25 @@ on:
     types: [closed]
     branches:
       - main
+
+# Job s are the tasks that this workflow will run
+jobs:
+  # Build and Publish job, builds the Docker image and pushes it to DockerHub
+  build-and-publish:
+    name: Build and Publish Docker Image
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    steps:
+      # Checks out your repository under $GITHUB_WORKSPACE
+      - uses: actions/checkout@v3
+      # Builds the Docker image
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag uyadav585/ci-cd:${{ github.sha }}
+      # Publishes the Docker image to DockerHub
+      - name: Publish to Registry
+        uses: elgohr/Publish-Docker-Github-Action@v4
+        with:
+          name: uyadav585/ci-cd
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          tags: "latest,${{ github.sha }}"
