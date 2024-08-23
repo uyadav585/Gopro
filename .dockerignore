@@ -1,0 +1,11 @@
+# Ignore git files.
+.git
+.gitignore
+.github
+
+# Ignore docker files.
+Dockerfile
+
+# Ignore awseb files.
+.elasticbeanstalk
+
