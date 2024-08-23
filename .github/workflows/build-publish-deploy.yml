@@ -43,7 +43,7 @@ jobs:
         run: |
           aws elasticbeanstalk update-environment \
             --environment-name Go-env \
-            --version-label "10"
+            --version-label "9"
 
   # Smoke Test job, checks if the application is running
   smoke-test:
