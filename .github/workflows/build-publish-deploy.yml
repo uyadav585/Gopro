@@ -43,4 +43,24 @@ jobs:
         run: |
           aws elasticbeanstalk update-environment \
             --environment-name Go-env \
-            --version-label "1"
+            --version-label "10"
+
+  # Smoke Test job, checks if the application is running
+  smoke-test:
+    name: Smoke Test
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for environment to start
+        run: sleep 120  # Adjust the duration based on the startup time of your Elastic Beanstalk environment
+
+      - name: Run smoke test
+        env:
+          AWS_APP_URL: ${{ secrets.AWS_APP_URL }}
+        run: |
+          sleep 60  # Wait for the application to start
+          status_code=$(curl --silent --output /dev/null --write-out "%{http_code}" $AWS_APP_URL)
+          if [ $status_code -ne 200 ]; then
+            echo "Smoke test failed with HTTP status code $status_code"
+            exit 1
+          fi
