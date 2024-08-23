@@ -1,9 +1,0 @@
-{
-    "AWSEBDockerrunVersion": "1",
-    "Image": {
-        "Name": "uyadav585/ci-cd"
-    },
-    "Ports":[
-        {"ContainerPort": "8080"}
-    ]
-}
