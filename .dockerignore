@@ -9,3 +9,9 @@ Dockerfile
 # Ignore awseb files.
 .elasticbeanstalk
 
+# Ignore vscodefiles
+.vscode
+
+# Ignore zipped app file
+app.zip
+
