@@ -4,7 +4,7 @@ name: Go Lint & Test
 # on:
 on:
   push:
-    branches: [ main ]
+    branches: [ to-be-merged ]
 
 # Jobs are the tasks that this workflow will run
 jobs:
